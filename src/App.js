@@ -6,8 +6,9 @@ import "./App.css";
 /* ======================
    BACKEND BASE URL
 ====================== */
-const BASE_URL = import.meta.env.VITE_API_BASE;
-console.log("VITE_API_BASE =", import.meta.env.VITE_API_BASE);
+const BASE_URL = "https://ibm-dashboard-backend.onrender.com";
+console.log("USING HARDCODED BASE_URL =", BASE_URL);
+
 
 
 /* ======================
