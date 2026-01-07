@@ -1,38 +1,552 @@
-.App {
-  text-align: center;
+/* =========================
+   GLOBAL
+========================= */
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+}
+
+.app {
+  max-width: 1400px;
+  margin: auto;
+  padding: 24px 16px 36px;
+}
+
+/* =========================
+   FULL WIDTH HEADER (MONOCHROMATIC PURPLE)
+========================= */
+.header {
+  position: relative;
+  width: 100vw;
+
+  /* Base purple gradient */
+  background: linear-gradient(
+    135deg,
+    #1b1b96 0%,
+    #7281c1 50%,
+    #6ea7ca 100%
+  );
+
+  padding: 10px 0;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* =========================
+   PRIMARY ANIMATED BLOB
+========================= */
+.header::after {
+  content: "";
+  position: absolute;
+  top: -45%;
+  right: -25%;
+  width: 560px;
+  height: 560px;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.55),
+    rgba(255, 255, 255, 0.22),
+    transparent 70%
+  );
+
+  border-radius: 55% 45% 60% 40% / 55% 60% 40% 45%;
+  opacity: 0.45;
+  filter: blur(3px);
+  mix-blend-mode: soft-light;
+
+  animation: purpleFloat 12s ease-in-out infinite;
+}
+
+/* =========================
+   SECONDARY DEPTH BLOB
+========================= */
+.header::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  right: 10%;
+  width: 340px;
+  height: 340px;
+
+  background: radial-gradient(
+    circle at 40% 40%,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.18),
+    transparent 70%
+  );
+
+  border-radius: 60% 40% 50% 50% / 50% 60% 40% 60%;
+  opacity: 0.8;
+  filter: blur(2px);
+  mix-blend-mode: soft-light;
+
+  animation: purpleFloat2 16s ease-in-out infinite reverse;
+}
+
+/* =========================
+   HEADER CONTENT ABOVE BLOBS
+========================= */
+.header-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.4px;
+}
+
+.header p {
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* =========================
+   ANIMATIONS (SMOOTH & VISIBLE)
+========================= */
+@keyframes purpleFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-70px, 45px) scale(1.12);
+  }
+  66% {
+    transform: translate(-45px, -55px) scale(0.96);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes purpleFloat2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-55px, -35px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+/* =========================
+   HEADER FLEX LAYOUT
+========================= */
+.header-flex {
+  display: flex;
+  align-items: center;
+}
+
+/* Left section: logo + text */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Logo styling */
+.header-logo {
+  height: 100%;                 /* ⬅ matches header content height */
+  max-height: 74px;             /* ⬅ safe limit (enterprise standard) */
+  width: auto;
+
+  padding: 10px 14px;
+
+  /* Premium glass effect */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+
+  display: flex;
+  align-items: center;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.header-logo:hover {
+  transform: translateY(-1px) scale(1.03);
+  background: rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 8px 26px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+
+
+
+
+/* =========================
+   CARDS
+========================= */
+.cards {
+  display: flex;
+  gap: 18px;
+  margin: 22px 0 28px;
+}
+
+.card {
+  flex: 1;
+  min-height: 105px;
+  border-radius: 18px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 20px 42px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.card span {
+  display: block;
+  font-size: 34px;
+  font-weight: 800;
+  margin-top: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   PARSED – Amber → Peach
+========================= */
+.card.parsed {
+  background: linear-gradient(
+    135deg,
+    #f59e0b 0%,
+    #fcd34d 45%,
+    #fde68a 100%
+  );
+  color: #1f2937;
+}
+
+/* =========================
+   SAVED – Teal → Mint
+========================= */
+.card.saved {
+  background: linear-gradient(
+    135deg,
+    #14b8a6 0%,
+    #5eead4 45%,
+    #ccfbf1 100%
+  );
+  color: #064e3b;
+}
+
+/* =========================
+   TOTAL – Blue → Soft Sky
+========================= */
+.card.total {
+  background: linear-gradient(
+    135deg,
+    #3b82f6 0%,
+    #60a5fa 45%,
+    #e0f2fe 100%
+  );
+  color: #0f172a;
+}
+
+/* =========================
+   Decorative light orb
+========================= */
+.card::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  top: -65px;
+  right: -65px;
+  opacity: 0.35;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.05)
+  );
+}
+
+/* =========================
+   Icon base
+========================= */
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  right: 18px;
+  width: 120px;
+  height: 120px;
+  opacity: 0.25;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Parsed icon */
+.card.parsed::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231f2937'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E");
+}
+
+/* Saved icon */
+.card.saved::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23064e3b'%3E%3Cpath d='M9 16.2l-3.5-3.5L4 14.2l5 5 12-12-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+/* Total icon */
+.card.total::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230f172a'%3E%3Cpath d='M3 5h18v2H3V5zm0 6h18v2H3v-2zm0 6h18v2H3v-2z'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   FILTERS (FINAL – COLOR + ANIMATION)
+========================= */
+.filters {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+/* =========================
+   INPUTS & SELECTS
+========================= */
+.filters input,
+.filters select {
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid #c7d2fe;          /* soft indigo border */
+  font-size: 14px;
+  background: #ffffff;
+  color: #1f2937;
+  min-width: 220px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters input::placeholder {
+  color: #6b7280;
+}
+
+.filters input:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #4f46e5;              /* matches header/cards */
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.22);
+}
+
+/* =========================
+   SEARCH RESULT INFO BAR
+========================= */
+.result-info {
+  margin-bottom: 14px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+
+  background: linear-gradient(
+    135deg,
+    rgba(79, 70, 229, 0.08),
+    rgba(99, 102, 241, 0.06)
+  );
+
+  color: #1e293b;
+  border-left: 4px solid #6366f1;
+}
+
+
+/* =========================
+   BUTTON BASE
+========================= */
+.btn {
+  height: 42px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+/* =========================
+   SEARCH BUTTON (PRIMARY)
+========================= */
+.btn.search {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2f3e94, #6869ab);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+}
+
+/* Hover */
+.btn.search:hover {
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.45);
+}
+
+/* Click / press effect */
+.btn.search:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.5);
+}
+
+/* Ripple animation */
+.btn.search::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.btn.search:active::after {
+  width: 180%;
+  height: 180%;
+  opacity: 0;
+  transition: width 0.45s ease, height 0.45s ease, opacity 0.6s ease;
+}
+
+/* =========================
+   RESET BUTTON (SECONDARY)
+========================= */
+.btn.reset {
+  background: #eef2ff;                /* soft indigo tint */
+  color: #1e293b;
+}
+
+.btn.reset:hover {
+  background: #e0e7ff;
+}
+
+
+
+/* =========================
+   TABLE (COLOR-REFRESHED)
+========================= */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.15);
+}
+
+/* Header: Indigo → Navy (ties to header & total card) */
+thead {
+  background: linear-gradient(135deg, #1b1b96, #5371a0);
+  color: #ffffff;
+}
+
+th {
+  padding: 16px 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Row hover: soft blue-lavender (very modern) */
+tbody tr {
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: #eef2ff;
+}
+
+/* Cells */
+td {
+  padding: 14px;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e7ff; /* softer, bluish border */
+}
+
+/* Last row cleanup */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================
+   STATUS BADGES
+========================= */
+.status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status.parsed {
+  background: rgba(245, 158, 11, 0.18);
+  color: #b45309;
+}
+
+.status.saved {
+  background: rgba(20, 184, 166, 0.18);
+  color: #065f46;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+  .cards {
+    flex-direction: column;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
